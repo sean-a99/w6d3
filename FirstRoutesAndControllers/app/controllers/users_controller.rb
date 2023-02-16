@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
 
   def index
-    render plain: "I'm in the index action!"
+    render json: User.all
   end
 
   def create
+    user = User.new(params.require(:user).permit(:name, :email))
+
+    user.save!
     render json: params
   end
 
